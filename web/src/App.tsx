@@ -309,7 +309,7 @@ function SheetFrame({ children, onClose }: { children: React.ReactNode; onClose:
 
 const KINDS: { k: Kind; label: string; hint: string }[] = [
   { k: 'subscription', label: 'Subscription', hint: 'Renews until you cancel' },
-  { k: 'contract', label: 'Contract', hint: 'Has an end date, like a phone contract' },
+  { k: 'contract', label: 'Contract', hint: 'Has an end date, like a lease or a fixed-term plan' },
   { k: 'trial', label: 'Free trial', hint: 'Free until a date, then it charges' },
   { k: 'bill', label: 'Bill', hint: 'Insurance, rent, anything regular' },
 ];
@@ -336,7 +336,7 @@ function Editor({ initial, currency, today, onSave, onCancel, onDelete }: {
       <>
         <div className="sheethead"><h2>Add</h2><button className="link" onClick={onCancel}>Cancel</button></div>
         <p className="step">Step 1 of 2 · Pick one, or type your own</p>
-        <input className="search" placeholder="Netflix, Mascom, gym…" value={q} onChange={(e) => setQ(e.target.value)}
+        <input className="search" placeholder="Netflix, Mascom bundle, gym…" value={q} onChange={(e) => setQ(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && q.trim() && pick(list.length === 1 ? list[0] : undefined)} autoFocus />
         <div className="grid">
           {q.trim() && !list.some((p) => p.name.toLowerCase() === q.trim().toLowerCase()) && (
