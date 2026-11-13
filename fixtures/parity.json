@@ -1,0 +1,49 @@
+{
+  "about": "Shared expectations for the web core (web/src/core) and Android core (android/app/src/main/java/.../core). Both test suites load this file. Expectations were worked out by hand, not generated.",
+  "subscriptions": [
+    { "id": "A", "name": "Netflix", "category": "streaming", "kind": "subscription", "amount": 99, "currency": "BWP",
+      "cycleUnit": "month", "cycleEvery": 1, "anchorDate": "2026-01-31", "autoRenews": true,
+      "remindDays": [3], "remindCharges": true, "status": "active" },
+    { "id": "B", "name": "Phone contract", "category": "phone", "kind": "contract", "amount": 450, "currency": "BWP",
+      "cycleUnit": "month", "cycleEvery": 1, "anchorDate": "2025-01-15", "endDate": "2026-12-15", "autoRenews": false,
+      "renewalCost": 1200, "remindDays": [60, 30, 7, 1], "remindCharges": false, "status": "active" },
+    { "id": "C", "name": "Trial app", "category": "software", "kind": "trial", "amount": 50, "currency": "BWP",
+      "cycleUnit": "month", "cycleEvery": 1, "anchorDate": "2026-11-15", "autoRenews": true,
+      "remindDays": [3, 1], "remindCharges": false, "status": "active" },
+    { "id": "D", "name": "Leap yearly", "category": "cloud", "kind": "subscription", "amount": 600, "currency": "BWP",
+      "cycleUnit": "year", "cycleEvery": 1, "anchorDate": "2024-02-29", "autoRenews": true,
+      "remindDays": [3], "remindCharges": true, "status": "active" },
+    { "id": "E", "name": "Cancelled weekly", "category": "news", "kind": "subscription", "amount": 10, "currency": "BWP",
+      "cycleUnit": "week", "cycleEvery": 1, "anchorDate": "2026-11-01", "autoRenews": true,
+      "remindDays": [3], "remindCharges": true, "status": "cancelled", "cancelledOn": "2026-11-15" },
+    { "id": "F", "name": "Fortnightly", "category": "fitness", "kind": "subscription", "amount": 20, "currency": "BWP",
+      "cycleUnit": "week", "cycleEvery": 2, "anchorDate": "2026-11-02", "autoRenews": true,
+      "remindDays": [3], "remindCharges": true, "status": "active" }
+  ],
+  "chargesBetween": [
+    { "id": "A", "from": "2026-02-01", "to": "2026-03-31", "expect": ["2026-02-28", "2026-03-31"] },
+    { "id": "B", "from": "2026-11-01", "to": "2027-01-31", "expect": ["2026-11-15"] },
+    { "id": "D", "from": "2025-01-01", "to": "2028-12-31", "expect": ["2025-02-28", "2026-02-28", "2027-02-28", "2028-02-29"] },
+    { "id": "E", "from": "2026-11-01", "to": "2026-11-30", "expect": ["2026-11-01", "2026-11-08"] },
+    { "id": "F", "from": "2026-11-01", "to": "2026-11-30", "expect": ["2026-11-02", "2026-11-16", "2026-11-30"] }
+  ],
+  "nextCharge": [
+    { "id": "A", "from": "2026-11-13", "expect": "2026-11-30" },
+    { "id": "B", "from": "2026-11-16", "expect": null },
+    { "id": "C", "from": "2026-11-13", "expect": "2026-11-15" }
+  ],
+  "monthlyEquivalent": [
+    { "id": "A", "expect": 99 },
+    { "id": "D", "expect": 50 },
+    { "id": "E", "expect": 0 },
+    { "id": "F", "expect": 43.48125 }
+  ],
+  "monthSpend": [
+    { "year": 2026, "month": 11, "total": 679, "average": 692.48 },
+    { "year": 2026, "month": 12, "total": 1389, "average": 692.48 }
+  ],
+  "dueReminders": [
+    { "today": "2026-11-13", "expectKeys": ["C|trial-end|2026-11-15|3", "F|charge|2026-11-16|3", "B|contract-end|2026-12-15|60"] },
+    { "today": "2026-12-14", "expectKeys": ["F|charge|2026-12-14|0", "B|contract-end|2026-12-15|1"] }
+  ]
+}
